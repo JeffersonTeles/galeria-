@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Galeria Romântica</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f0ff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #e91e63;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px auto;
+            max-width: 900px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .caption {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minha Galeria Romântica</h1>
+    <p>Para minha namorada, com todo amor do mundo.</p>
+    <div class="gallery">
+        <div>
+            <img src="foto1.jpg" alt="Foto 1">
+            <div class="caption">Lembrança especial</div>
+        </div>
+        <div>
+            <img src="foto2.jpg" alt="Foto 2">
+            <div class="caption">Momento inesquecível</div>
+        </div>
+        <!-- Adicione mais fotos conforme necessário -->
+    </div>
+</body>
+</html>
