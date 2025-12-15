@@ -2,89 +2,181 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Pra Você ♥</title>
+    <title>PARA BIA ♥</title>
+
+    <!-- Fontes românticas do Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Nunito:wght@300;400;600&display=swap">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #ffeef5;
+            font-family: 'Nunito', Arial, sans-serif;
+            background: radial-gradient(circle at top, #fff5fb 0, #ffeef7 35%, #ffd9ec 70%, #ffeefb 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
             text-align: center;
             margin: 0;
             padding: 20px;
         }
+
         h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.6rem;
             color: #e91e63;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
+
         p {
             max-width: 600px;
             margin: 0 auto 30px;
+            font-size: 1.05rem;
+            color: #4a2b3b;
         }
+
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            max-width: 900px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto 20px;
         }
+
+        .item {
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+        }
+
         .item img {
             width: 100%;
             border-radius: 10px;
+            display: block;
         }
+
         .caption {
-            font-size: 14px;
-            color: #555;
-            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #5b3a4a;
+            margin-top: 6px;
+        }
+
+        /* Overlay de mensagem */
+        .love-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;            /* começa escondido */
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .love-overlay-content {
+            max-width: 90%;
+            padding: 20px;
+            border-radius: 16px;
+            background: radial-gradient(circle at top, #fff0f7, #ffe3f1);
+            box-shadow: 0 0 25px rgba(0,0,0,0.25);
+        }
+
+        .love-overlay h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: #e91e63;
+            margin: 0 0 10px;
+        }
+
+        .love-overlay p {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #4a2b3b;
+        }
+
+        .love-overlay small {
+            display: block;
+            margin-top: 18px;
+            font-size: 0.85rem;
+            color: #7a5166;
         }
     </style>
 </head>
 <body>
-    <h1>Alguns dos nossos momentos</h1>
+    <h1>Algo simples para a pessoa que mais amo, e você é tão especial que só você tem acesso a esse link/site. ♥</h1>
     <p>Quis guardar aqui um pedacinho da nossa história, porque cada foto com você é especial pra mim.</p>
 
     <div class="gallery">
         <div class="item">
             <img src="foto1.jpeg" alt="Foto 1">
-            <div class="caption">Momento 1</div>
+            <div class="caption">Quando tudo começou</div>
         </div>
         <div class="item">
             <img src="foto2.jpeg" alt="Foto 2">
-            <div class="caption">Momento 2</div>
+            <div class="caption">Um abraço que acalma tudo.</div>
         </div>
         <div class="item">
             <img src="foto3.jpeg" alt="Foto 3">
-            <div class="caption">Momento 3</div>
+            <div class="caption">Um dia que nunca esqueço, adorar a Jesus com a pessoa que eu amo não tem preço!</div>
         </div>
         <div class="item">
             <img src="foto4.jpeg" alt="Foto 4">
-            <div class="caption">Momento 4</div>
+            <div class="caption">Sua companhia é a melhor possível</div>
         </div>
         <div class="item">
             <img src="foto5.jpeg" alt="Foto 5">
-            <div class="caption">Momento 5</div>
+            <div class="caption">Amo ver o mundo ao seu lado!</div>
         </div>
         <div class="item">
             <img src="foto6.jpeg" alt="Foto 6">
-            <div class="caption">Momento 6</div>
+            <div class="caption">Aquela foto improvisada</div>
         </div>
         <div class="item">
             <img src="foto7.jpeg" alt="Foto 7">
-            <div class="caption">Momento 7</div>
+            <div class="caption">Nossa primeira foto oficial 😂</div>
         </div>
         <div class="item">
             <img src="foto8.jpeg" alt="Foto 8">
-            <div class="caption">Momento 8</div>
+            <div class="caption">Nossa aventura juntos</div>
         </div>
         <div class="item">
             <img src="foto9.jpeg" alt="Foto 9">
-            <div class="caption">Momento 9</div>
+            <div class="caption">Um dia comum, mas perfeito</div>
         </div>
         <div class="item">
             <img src="foto10.jpeg" alt="Foto 10">
-            <div class="caption">Momento 10</div>
+            <div class="caption">Mais um motivo pra te amar</div>
         </div>
         <div class="item">
             <img src="foto11.jpeg" alt="Foto 11">
-            <div class="caption">Momento 11</div>
+            <div class="caption">O futuro que eu quero com você</div>
         </div>
     </div>
+
+    <!-- Overlay de declaração -->
+    <div id="loveOverlay" class="love-overlay">
+        <div class="love-overlay-content">
+            <h2>Eu te amo </h2>
+            <p>e vou casar com você! ♥</p>
+            <small>(Clique em qualquer lugar para aceitar.)</small>
+        </div>
+    </div>
+
+    <script>
+        // Pega todas as fotos
+        const items = document.querySelectorAll('.item');
+        const overlay = document.getElementById('loveOverlay');
+
+        // Quando clicar em qualquer foto, mostra a mensagem
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                overlay.style.display = 'flex';
+            });
+        });
+
+        // Clicou no overlay, esconde de novo
+        overlay.addEventListener('click', () => {
+            overlay.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
