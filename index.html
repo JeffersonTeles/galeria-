@@ -27,77 +27,165 @@
         }
 
         p {
-            max-width: 600px;
-            margin: 0 auto 30px;
-            font-size: 1.05rem;
+            max-width: 520px;
+            margin: 0 auto 25px;
+            font-size: 1rem;
             color: #4a2b3b;
         }
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            max-width: 720px;
             margin: 0 auto 20px;
         }
 
         .item {
+            position: relative;
             background: rgba(255, 255, 255, 0.75);
             border-radius: 12px;
-            padding: 8px;
+            padding: 6px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             cursor: pointer;
+            overflow: hidden;
         }
 
         .item img {
             width: 100%;
             border-radius: 10px;
             display: block;
+            opacity: 0.12; /* bem fosca */
+            transition: opacity 0.25s ease, transform 0.25s ease;
         }
 
-        .caption {
-            font-size: 0.9rem;
-            color: #5b3a4a;
-            margin-top: 6px;
+        .item:hover img {
+            opacity: 0.25;
+            transform: scale(1.02);
         }
 
-        /* Overlay de mensagem */
-        .love-overlay {
+        .click-hint {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(0,0,0,0.6);
+        }
+
+        .final-button-wrapper {
+            margin: 26px 0 10px;
+        }
+
+        #finalButton {
+            font-family: 'Nunito', Arial, sans-serif;
+            font-size: 0.95rem;
+            padding: 9px 22px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff89b5, #ff6fa0);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #finalButton:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+        }
+
+        .overlay {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.7);
-            display: none;            /* começa escondido */
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 9999;
         }
 
-        .love-overlay-content {
+        .overlay-content {
             max-width: 90%;
-            padding: 20px;
+            width: 420px;
+            padding: 20px 22px;
             border-radius: 16px;
             background: radial-gradient(circle at top, #fff0f7, #ffe3f1);
             box-shadow: 0 0 25px rgba(0,0,0,0.25);
+            position: relative;
+            text-align: center;
         }
 
-        .love-overlay h2 {
+        .overlay-photo {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
+
+        .overlay h2 {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 4.2vw, 2.2rem);
             color: #e91e63;
-            margin: 0 0 10px;
+            margin: 0 0 8px;
         }
 
-        .love-overlay p {
+        .overlay p {
             margin: 0;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: #4a2b3b;
         }
 
-        .love-overlay small {
+        .overlay small {
             display: block;
-            margin-top: 18px;
-            font-size: 0.85rem;
+            margin-top: 16px;
+            font-size: 0.8rem;
             color: #7a5166;
+        }
+
+        #closePhotoOverlay,
+        #closeLoveOverlay {
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            font-size: 1.6rem;
+            line-height: 1;
+            cursor: pointer;
+            color: #c5476d;
+        }
+
+        #closePhotoOverlay:hover,
+        #closeLoveOverlay:hover {
+            color: #a13054;
+        }
+
+        #loveOverlay h2 {
+            font-size: clamp(2.4rem, 5.5vw, 3rem);
+        }
+
+        #loveOverlay p {
+            font-size: clamp(1.3rem, 3.8vw, 1.7rem);
+        }
+
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 12px;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p {
+                font-size: 0.95rem;
+                padding: 0 10px;
+            }
         }
     </style>
 </head>
@@ -106,76 +194,121 @@
     <p>Quis guardar aqui um pedacinho da nossa história, porque cada foto com você é especial pra mim.</p>
 
     <div class="gallery">
-        <div class="item">
+        <div class="item" data-img="foto1.jpeg" data-text="Quando tudo começou.">
             <img src="foto1.jpeg" alt="Foto 1">
-            <div class="caption">Quando tudo começou</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto2.jpeg" data-text="Um abraço que acalma tudo.">
             <img src="foto2.jpeg" alt="Foto 2">
-            <div class="caption">Um abraço que acalma tudo.</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto3.jpeg" data-text="Um dia que nunca esqueço, adorar a Jesus com a pessoa que eu amo não tem preço!">
             <img src="foto3.jpeg" alt="Foto 3">
-            <div class="caption">Um dia que nunca esqueço, adorar a Jesus com a pessoa que eu amo não tem preço!</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto4.jpeg" data-text="Sua companhia é a melhor possível.">
             <img src="foto4.jpeg" alt="Foto 4">
-            <div class="caption">Sua companhia é a melhor possível</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto5.jpeg" data-text="Amo ver o mundo ao seu lado!">
             <img src="foto5.jpeg" alt="Foto 5">
-            <div class="caption">Amo ver o mundo ao seu lado!</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto6.jpeg" data-text="Aquela foto improvisada.">
             <img src="foto6.jpeg" alt="Foto 6">
-            <div class="caption">Aquela foto improvisada</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto7.jpeg" data-text="Nossa primeira foto oficial 😂">
             <img src="foto7.jpeg" alt="Foto 7">
-            <div class="caption">Nossa primeira foto oficial 😂</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto8.jpeg" data-text="Nossa aventura juntos.">
             <img src="foto8.jpeg" alt="Foto 8">
-            <div class="caption">Nossa aventura juntos</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto9.jpeg" data-text="Um dia comum, mas perfeito.">
             <img src="foto9.jpeg" alt="Foto 9">
-            <div class="caption">Um dia comum, mas perfeito</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto10.jpeg" data-text="Mais um motivo pra te amar.">
             <img src="foto10.jpeg" alt="Foto 10">
-            <div class="caption">Mais um motivo pra te amar</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
-        <div class="item">
+        <div class="item" data-img="foto11.jpeg" data-text="O futuro que eu quero com você.">
             <img src="foto11.jpeg" alt="Foto 11">
-            <div class="caption">O futuro que eu quero com você</div>
+            <div class="click-hint">Clique aqui</div>
         </div>
     </div>
 
-    <!-- Overlay de declaração -->
-    <div id="loveOverlay" class="love-overlay">
-        <div class="love-overlay-content">
-            <h2>Eu te amo </h2>
+    <div class="final-button-wrapper">
+        <button id="finalButton">Clique aqui para fizalizar.</button>
+    </div>
+
+    <!-- Overlay da foto + frase -->
+    <div id="photoOverlay" class="overlay">
+        <div class="overlay-content">
+            <span id="closePhotoOverlay">&times;</span>
+            <img id="overlayPhoto" class="overlay-photo" src="" alt="Momento">
+            <h2>Nosso momento</h2>
+            <p id="overlayText"></p>
+            <small>(Clique em qualquer lugar ou no “X” para voltar.)</small>
+        </div>
+    </div>
+
+    <!-- Overlay da declaração final -->
+    <div id="loveOverlay" class="overlay">
+        <div class="overlay-content">
+            <span id="closeLoveOverlay">&times;</span>
+            <h2>Eu te amo</h2>
             <p>e vou casar com você! ♥</p>
-            <small>(Clique em qualquer lugar para aceitar.)</small>
+            <small>(Clique em qualquer lugar ou no “X” para voltar para a nossa galeria.)</small>
         </div>
     </div>
 
     <script>
-        // Pega todas as fotos
         const items = document.querySelectorAll('.item');
-        const overlay = document.getElementById('loveOverlay');
+        const photoOverlay = document.getElementById('photoOverlay');
+        const overlayPhoto = document.getElementById('overlayPhoto');
+        const overlayText = document.getElementById('overlayText');
+        const closePhotoOverlay = document.getElementById('closePhotoOverlay');
 
-        // Quando clicar em qualquer foto, mostra a mensagem
+        const loveOverlay = document.getElementById('loveOverlay');
+        const closeLoveOverlay = document.getElementById('closeLoveOverlay');
+        const finalButton = document.getElementById('finalButton');
+
+        // Ao clicar em uma foto, abre overlay com a foto e o texto
         items.forEach(item => {
             item.addEventListener('click', () => {
-                overlay.style.display = 'flex';
+                const imgSrc = item.getAttribute('data-img');
+                const text = item.getAttribute('data-text');
+                overlayPhoto.src = imgSrc;
+                overlayText.textContent = text;
+                photoOverlay.style.display = 'flex';
             });
         });
 
-        // Clicou no overlay, esconde de novo
-        overlay.addEventListener('click', () => {
-            overlay.style.display = 'none';
+        // Fecha overlay da foto
+        photoOverlay.addEventListener('click', () => {
+            photoOverlay.style.display = 'none';
+        });
+
+        closePhotoOverlay.addEventListener('click', (e) => {
+            e.stopPropagation();
+            photoOverlay.style.display = 'none';
+        });
+
+        // Botão final: mostra declaração
+        finalButton.addEventListener('click', () => {
+            loveOverlay.style.display = 'flex';
+        });
+
+        loveOverlay.addEventListener('click', () => {
+            loveOverlay.style.display = 'none';
+        });
+
+        closeLoveOverlay.addEventListener('click', (e) => {
+            e.stopPropagation();
+            loveOverlay.style.display = 'none';
         });
     </script>
 </body>
